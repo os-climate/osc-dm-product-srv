@@ -1,0 +1,11 @@
+parent_name,utility_name,respondent_id,year,asset,sub_asset,asset_value,earnings_value,investment_value
+"American Electric Power Co., Inc.",AEP Generating Co.,1.0,2020,other,AROs,-15405378.0,-0.0,
+"American Electric Power Co., Inc.",AEP Generating Co.,1.0,2020,other,electric_plant_held_for_future_use,1034099.0,0.0,
+"American Electric Power Co., Inc.",AEP Generating Co.,1.0,2020,other,electric_plant_leased_to_others,155616036.0,0.0,
+"American Electric Power Co., Inc.",AEP Generating Co.,1.0,2020,other,general_plant,427318.0,0.0,1846.0
+"American Electric Power Co., Inc.",AEP Generating Co.,1.0,2020,other,intangible_plant,724784.0,0.0,
+"American Electric Power Co., Inc.",AEP Generating Co.,1.0,2020,other,net_ADIT,-24715200.0,-0.0,
+"American Electric Power Co., Inc.",AEP Generating Co.,1.0,2020,other,net_regulatory_assets,-28744975.0,-0.0,
+"American Electric Power Co., Inc.",AEP Generating Co.,1.0,2020,other,net_working_capital,33336318.0,0.0,
+"American Electric Power Co., Inc.",AEP Generating Co.,1.0,2020,other,other_deferred_debits_and_credits,-10988868.0,-0.0,
+"American Electric Power Co., Inc.",AEP Generating Co.,1.0,2020,other,other_electric_plant,24081501.0,0.0,

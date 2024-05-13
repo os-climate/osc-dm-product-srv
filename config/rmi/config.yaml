@@ -1,0 +1,8 @@
+product:
+    host: 0.0.0.0
+    port: 8000
+proxy:
+    # Note that host/port must be known
+    # inside the docker container
+    host: "bgs-dm-proxy-srv"
+    port: 8000

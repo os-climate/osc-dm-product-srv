@@ -1,0 +1,10 @@
+artifact:
+  name: Expenditure Bills Burden
+  description: Expenditure, average residential customer energy bill, and average residential customer energy burden for each utility by technology and customer group.
+  tags: ["utilities", "emissions"]
+  license: CDLA 2.0, Permissive, Version 2.0
+  securitypolicy: public
+  links:
+    - relationship: artifact
+      mimetype: text/csv
+      url: https://utilitytransitionhub.rmi.org/static/data_download/expenditure_bills_burden.csv

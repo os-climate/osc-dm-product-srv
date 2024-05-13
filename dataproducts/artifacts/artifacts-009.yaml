@@ -1,0 +1,10 @@
+artifact:
+  name: Net Plant Balance
+  description: Original cost, accumulated depreciation, and remaining net plant balance of electric plants in service, by FERC classification.
+  tags: ["utilities", "emissions"]
+  license: CDLA 2.0, Permissive, Version 2.0
+  securitypolicy: public
+  links:
+    - relationship: artifact
+      mimetype: text/csv
+      url: https://utilitytransitionhub.rmi.org/static/data_download/net_plant_balance.csv

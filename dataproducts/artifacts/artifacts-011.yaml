@@ -1,0 +1,10 @@
+artifact:
+  name: Operations Emissions by Tech
+  description: Capacity, generation, capacity factor, fuel consumption, and emissions of CO2, NOx, and SOx for each generator owned by each utility, and for power purchased by each utility. Each generator is identified by a single technology.
+  tags: ["utilities", "emissions"]
+  license: CDLA 2.0, Permissive, Version 2.0
+  securitypolicy: public
+  links:
+    - relationship: artifact
+      mimetype: application/zip
+      url: https://utilitytransitionhub.rmi.org/static/data_download/operations_emissions_by_tech.zip

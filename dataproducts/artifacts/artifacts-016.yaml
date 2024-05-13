@@ -1,0 +1,10 @@
+artifact:
+  name: Utility Information
+  description: Utility identifiers such as name, ID numbers from various sources, and utility type. Includes connections from operating companies to parent companies.
+  tags: ["utilities", "emissions"]
+  license: CDLA 2.0, Permissive, Version 2.0
+  securitypolicy: public
+  links:
+    - relationship: artifact
+      mimetype: text/csv
+      url: https://utilitytransitionhub.rmi.org/static/data_download/utility_information.csv

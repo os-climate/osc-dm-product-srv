@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+
+    # Data Product
+    bgs-dm-product-srv:
+        image: ${DOCKERHUB_USERNAME}/${IMAGE_NAME}:latest
+        hostname: ${HOSTNAME}
+        # container_name: ${HOSTNAME}
+        ports:
+        # OUTSIDE:INSIDE
+        # curl http://localhost:${SERVER_PORT}/data
+        - ${PUBLIC_PORT}:${PRIVATE_PORT}
+        volumes:
+        - ${PROJECT_DIR}/config/${CONFIG_NAME}:/app/config
+        - ${DATA_DIR}/dataproducts/${CONFIG_NAME}:/app/dataproducts
+        networks:
+        - localnet
+
+networks:
+    localnet:
+        external: true

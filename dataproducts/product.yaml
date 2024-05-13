@@ -1,0 +1,10 @@
+product:
+    namespace: brodagroupsoftware.com
+    name: rmi.dataproduct
+    description: US Utility data provided by RMI
+    tags: ["utilities", "emissions"]
+    publisher: publisher.user@brodagroupsoftware.com
+    endpoints:
+        discovery: http://localhost:9999/discovery
+        observability: http://localhost:9999/observability
+        administration: http://localhost:9999/administration

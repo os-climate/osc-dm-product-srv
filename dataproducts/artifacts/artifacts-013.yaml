@@ -1,0 +1,10 @@
+artifact:
+  name: State Targets
+  description: Greenhouse gas (GHG) and renewable portfolio standard (RPS) data by state, including baseline, interim, and final target years
+  tags: ["utilities", "emissions"]
+  license: CDLA 2.0, Permissive, Version 2.0
+  securitypolicy: public
+  links:
+    - relationship: artifact
+      mimetype: text/csv
+      url: https://utilitytransitionhub.rmi.org/static/data_download/state_targets.csv

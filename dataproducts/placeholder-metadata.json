@@ -1,0 +1,48 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Utility Assets Data",
+    "description": "Schema for representing utility assets data as described in a CSV format",
+    "type": "array",
+    "items": {
+      "type": "object",
+      "properties": {
+        "parent_name": {
+          "type": "string",
+          "description": "Name of the parent company"
+        },
+        "utility_name": {
+          "type": "string",
+          "description": "Name of the specific utility company"
+        },
+        "respondent_id": {
+          "type": "number",
+          "description": "Identifier for the respondent"
+        },
+        "year": {
+          "type": "integer",
+          "description": "Year of the data entry"
+        },
+        "asset": {
+          "type": "string",
+          "description": "Type of asset"
+        },
+        "sub_asset": {
+          "type": "string",
+          "description": "Subcategory of the asset"
+        },
+        "asset_value": {
+          "type": "number",
+          "description": "Value of the asset"
+        },
+        "earnings_value": {
+          "type": ["number", "null"],
+          "description": "Earnings from the asset, can be null"
+        },
+        "investment_value": {
+          "type": ["number", "null"],
+          "description": "Investment made on the asset, can be null"
+        }
+      },
+      "required": ["parent_name", "utility_name", "respondent_id", "year", "asset", "sub_asset", "asset_value", "earnings_value"]
+    }
+  }

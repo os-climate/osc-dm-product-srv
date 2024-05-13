@@ -1,0 +1,10 @@
+artifact:
+  name: Utility State Map
+  description: A list of states that each utility operates in, including capacity owned in state, capacity operated in state, and energy sales in state.
+  tags: ["utilities", "emissions"]
+  license: CDLA 2.0, Permissive, Version 2.0
+  securitypolicy: public
+  links:
+    - relationship: artifact
+      mimetype: text/csv
+      url: https://utilitytransitionhub.rmi.org/static/data_download/utility_state_map.csv

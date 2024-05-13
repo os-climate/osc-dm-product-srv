@@ -1,0 +1,10 @@
+artifact:
+  name: Emissions Targets
+  description: CO2 emissions and projections, as well as electricity generation and projections and comparison to RMI 1.5°C decarbonization pathway for the US electricity sector.
+  tags: ["utilities", "emissions"]
+  license: CDLA 2.0, Permissive, Version 2.0
+  securitypolicy: public
+  links:
+    - relationship: artifact
+      mimetype: text/csv
+      url: https://utilitytransitionhub.rmi.org/static/data_download/emissions_targets.csv

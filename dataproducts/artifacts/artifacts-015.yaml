@@ -1,0 +1,10 @@
+artifact:
+  name: Uneconomic Dispatch
+  description: Capacity and monthly cash flows used for monthly net revenues and gross losses for all operating coal plants above 5 MWs in the nation
+  tags: ["utilities", "emissions"]
+  license: CDLA 2.0, Permissive, Version 2.0
+  securitypolicy: public
+  links:
+    - relationship: artifact
+      mimetype: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+      url: https://utilitytransitionhub.rmi.org/static/data_download/uneconomic_dispatch_monthly_cash_flow.xlsx
