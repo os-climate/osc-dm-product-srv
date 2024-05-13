@@ -2,7 +2,7 @@ version: '3.8'
 services:
 
     # Data Product
-    bgs-dm-product-srv:
+    osc-dm-product-srv:
         image: ${DOCKERHUB_USERNAME}/${IMAGE_NAME}:latest
         hostname: ${HOSTNAME}
         # container_name: ${HOSTNAME}

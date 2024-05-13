@@ -288,7 +288,7 @@ def _register():
     metadata: AbstractMetadata = state.gstate(STATE_METADATA)
     import socket
     hostname = socket.gethostname()
-    # http://bgs-dm-product-srv-0:8000
+    # http://osc-dm-product-srv-0:8000
     product_address = "http://" + hostname + ":" + "8000"
     logger.info(f"Product address:{product_address}")
 

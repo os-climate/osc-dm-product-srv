@@ -1,18 +1,18 @@
-# bgs-dm-product-srv - Data Mesh Data Product
+# osc-dm-product-srv - Data Mesh Data Product
 
-bgs-dm-product-srv is a data product agent
+osc-dm-product-srv is a data product agent
 service for Broda Group Software's Data Mesh platform,
 allowing data product configurations to be registered
 (published), and data products to be discoverable, observable,
 and manageable.
 
 Full documentation is available in in the
-[bgs-dm-mesh-doc](https://github.com/brodagroupsoftware/bgs-dm-mesh-doc)
+[osc-dm-mesh-doc](https://github.com/brodagroupsoftware/osc-dm-mesh-doc)
 repo.
 
 This application interacts with other applications. You can run
 the full set of applications by following instructions in the
-[bgs-dm-mesh-doc](https://github.com/brodagroupsoftware/bgs-dm-mesh-doc)
+[osc-dm-mesh-doc](https://github.com/brodagroupsoftware/osc-dm-mesh-doc)
 repo.
 
 The remaining sections explain how to Dockerize the application
@@ -72,7 +72,7 @@ $PROJECT_DIR/bin/dockerize.sh
 This service is designed to work with other services and
 can be started with the full set of Data Mesh components.
 Information about starting the full set of components
-can be found [here](https://github.com/brodagroupsoftware/bgs-dm-mesh-srv)
+can be found [here](https://github.com/brodagroupsoftware/osc-dm-mesh-srv)
 
 A standalone server can be started for testing purposes
 using the following command:

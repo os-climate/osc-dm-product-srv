@@ -17,7 +17,7 @@ if [ -z ${HOME_DIR+x} ] ; then
 fi
 
 export ROOT_DIR="$HOME_DIR"
-export PROJECT="bgs-dm-product-srv"
+export PROJECT="osc-dm-product-srv"
 export PROJECT_DIR="$ROOT_DIR/$PROJECT"
 
 #####
@@ -26,6 +26,6 @@ export PROJECT_DIR="$ROOT_DIR/$PROJECT"
 # containing data products.  This is set to the
 # the workspace samples directory by default.
 #####
-export DATA_DIR="$ROOT_DIR/bgs-dm-samples-dat"
+export DATA_DIR="$ROOT_DIR/osc-dm-samples-dat"
 
 $PROJECT_DIR/bin/show.sh

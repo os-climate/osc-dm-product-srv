@@ -4,5 +4,5 @@ product:
 proxy:
     # Note that host/port must be known
     # inside the docker container
-    host: "bgs-dm-proxy-srv"
+    host: "osc-dm-proxy-srv"
     port: 8000
