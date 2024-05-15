@@ -36,7 +36,8 @@ LOGGING_FORMAT = "%(asctime)s - %(module)s:%(funcName)s %(levelname)s - %(messag
 logging.basicConfig(level=logging.INFO, format=LOGGING_FORMAT)
 logger = logging.getLogger(__name__)
 
-ENDPOINT_PREFIX = "/api/dataproducts"
+ENDPOINT_DATAPRODUCTS = "/dataproducts"
+ENDPOINT_PREFIX = "/api" + ENDPOINT_DATAPRODUCTS
 DEFAULT_HOST="0.0.0.0"
 DEFAULT_PORT=8000
 DEFAULT_CONFIG="./config/config.yaml"
@@ -55,7 +56,7 @@ app = FastAPI()
 
 
 @app.get(ENDPOINT_PREFIX + "/uuid/{uuid}/tmp/{path}")
-async def discovery_tmp_file_get(uuid: str, path: str):
+async def dataproducts_tmp_file_get(uuid: str, path: str):
     """
     This is a TEMPORARY endpoint used by the Marketplace UX
     to get samples and metadata where it does not exist yet
@@ -130,7 +131,7 @@ async def discovery_tmp_file_get(uuid: str, path: str):
 
 
 @app.get(ENDPOINT_PREFIX + "/uuid/{uuid}")
-async def discovery_uuid_get(uuid: str) -> models.FQProduct:
+async def dataproducts_uuid_get(uuid: str) -> models.FQProduct:
     """
     Discover product by uuid
     """
@@ -158,7 +159,7 @@ async def discovery_uuid_get(uuid: str) -> models.FQProduct:
 
 
 @app.get(ENDPOINT_PREFIX + "/uuid/{uuid}/artifacts")
-async def discovery_uuid_artifacts_get(uuid: str) -> List[models.Artifact]:
+async def dataproducts_uuid_artifacts_get(uuid: str) -> List[models.Artifact]:
     """
     Discover all artifacts for a product
     """
@@ -191,7 +192,7 @@ async def discovery_uuid_artifacts_get(uuid: str) -> List[models.Artifact]:
 
 
 @app.get(ENDPOINT_PREFIX + "/uuid/{uuid}/artifacts/{artifact_uuid}")
-async def discovery_uuid_artifacts_get(uuid: str, artifact_uuid: str) -> models.Artifact:
+async def dataproducts_uuid_artifacts_get(uuid: str, artifact_uuid: str) -> models.Artifact:
     """
     Discover product artifact by uuid
     """
@@ -232,7 +233,7 @@ async def discovery_uuid_artifacts_get(uuid: str, artifact_uuid: str) -> models.
 
 
 @app.get(ENDPOINT_PREFIX + "/uuid/{uuid}/metrics")
-async def observability_get(uuid: str):
+async def dataproducts_observability_get(uuid: str):
     """
     Observability
     """
@@ -253,6 +254,42 @@ async def administration_get(uuid: str):
     response = { "msg": "Not implemented" }
     logger.info(f"DONE: Administration uuid:{uuid}, response:{response}")
     return response
+
+
+#####
+# MONITOR
+#####
+
+
+@app.get(ENDPOINT_PREFIX + "/health")
+async def dataproducts_health_get():
+    """
+    Get health information
+    """
+    logger.info("START: Get health information")
+
+    response = {
+        "health": "OK"
+    }
+
+    logger.info(f"DONE: Get health information, response:{response}")
+    return response
+
+
+@app.get(ENDPOINT_PREFIX + "/metrics")
+async def dataproducts_metrics_get():
+    """
+    Get metrics information
+    """
+    logger.info("START: Get metrics information")
+
+    response = {
+        "metrics": "some-metrics"
+    }
+
+    logger.info(f"DONE: Get metrics information, response:{response}")
+    return response
+
 
 #####
 # INTERNAL
@@ -368,6 +405,7 @@ async def startup_event():
     logger.info(f"STARTUP Using:{path}")
     # Running the directory watcher in the background
     asyncio.create_task(watch_directory(path))
+
 
 import asyncio
 from watchgod import awatch, Change
