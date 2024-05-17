@@ -30,6 +30,7 @@ import state
 from registrar import Registrar
 from bgsexception import BgsException, BgsNotFoundException
 from abstractmetadata import AbstractMetadata
+from middleware import LoggingMiddleware
 
 # Set up logging
 LOGGING_FORMAT = "%(asctime)s - %(module)s:%(funcName)s %(levelname)s - %(message)s"
@@ -53,6 +54,7 @@ REGISTRATION_FILENAME = "registration.yaml"
 
 # Set up server
 app = FastAPI()
+app.add_middleware(LoggingMiddleware)
 
 
 @app.get(ENDPOINT_PREFIX + "/uuid/{uuid}/tmp/{path}")
@@ -66,7 +68,6 @@ async def dataproducts_tmp_file_get(uuid: str, path: str):
     METADATA ARE SUPPORTED!
     """
     response = None
-    logger.info(f"START: Get contents of file:{path}")
 
     fqpath = None
     try:
@@ -126,7 +127,6 @@ async def dataproducts_tmp_file_get(uuid: str, path: str):
         raise HTTPException(status_code=500, detail=msg)
 
     response = data
-    logger.info(f"DONE: Get contents of file:{path}, response:{response}")
     return response
 
 
@@ -136,17 +136,12 @@ async def dataproducts_uuid_get(uuid: str) -> models.FQProduct:
     Discover product by uuid
     """
     response = None
-    logger.info(f"START: Discover product by uuid:{uuid}")
 
     metadata = state.gstate(STATE_METADATA)
     fqproduct: models.FQProduct = metadata.info()
     logger.info(f"fqproduct:{fqproduct}")
 
     # Check to ensure the UUID matches
-    logger.info(
-        f"Verifying product uuid:{fqproduct.product.uuid} "
-        f"requested uuid:{uuid}"
-    )
     if uuid != fqproduct.product.uuid:
         msg = f"Invalid uuid:{uuid} (does not match uuid for product)"
         logger.error(msg)
@@ -154,7 +149,6 @@ async def dataproducts_uuid_get(uuid: str) -> models.FQProduct:
 
     response = fqproduct
 
-    logger.info(f"DONE: Discover product by uuid:{uuid}, response:{response}")
     return response
 
 
@@ -164,7 +158,6 @@ async def dataproducts_uuid_artifacts_get(uuid: str) -> List[models.Artifact]:
     Discover all artifacts for a product
     """
     response = None
-    logger.info(f"START: Discover all artifacts for a product uuid:{uuid}")
 
     # Should check to ensure the UUID matches?
 
@@ -172,10 +165,6 @@ async def dataproducts_uuid_artifacts_get(uuid: str) -> List[models.Artifact]:
     fqproduct: models.FQProduct = metadata.info()
 
     # Check to ensure the UUID matches
-    logger.info(
-        f"Verifying product uuid:{fqproduct.product.uuid} "
-        f"requested uuid:{uuid}"
-    )
     if uuid != fqproduct.product.uuid:
         msg = f"Invalid uuid:{uuid} (does not match uuid for product)"
         logger.error(msg)
@@ -184,10 +173,6 @@ async def dataproducts_uuid_artifacts_get(uuid: str) -> List[models.Artifact]:
     artifacts: List[models.Artifact] = fqproduct.artifacts
     response = artifacts
 
-    logger.info(
-        f"DONE: Discover all artifacts for a product "
-        f"uuid:{uuid}, response:{response}"
-    )
     return response
 
 
@@ -197,19 +182,11 @@ async def dataproducts_uuid_artifacts_get(uuid: str, artifact_uuid: str) -> mode
     Discover product artifact by uuid
     """
     response = None
-    logger.info(
-        f"START: Discover product uuid:{uuid} "
-        f"artifact uuid:{artifact_uuid}"
-    )
 
     metadata = state.gstate(STATE_METADATA)
     fqproduct: models.FQProduct = metadata.info()
 
     # Check to ensure the UUID matches
-    logger.info(
-        f"Verifying product uuid:{fqproduct.product.uuid} "
-        f"requested uuid:{uuid}"
-    )
     if uuid != fqproduct.product.uuid:
         msg = f"Invalid uuid:{uuid} (does not match uuid for product)"
         logger.error(msg)
@@ -223,12 +200,6 @@ async def dataproducts_uuid_artifacts_get(uuid: str, artifact_uuid: str) -> mode
             break
 
     response = found_artifact
-
-    logger.info(
-        f"DONE: Discover product uuid:{uuid} "
-        f"artifact uuid:{artifact_uuid}, "
-        f"response:{response}"
-    )
     return response
 
 
@@ -238,9 +209,7 @@ async def dataproducts_observability_get(uuid: str):
     Observability
     """
     response = None
-    logger.info(f"START: Observability uuid:{uuid}")
     response = { "msg": "Not implemented" }
-    logger.info(f"DONE: Observability uuid:{uuid}, response:{response}")
     return response
 
 
@@ -250,9 +219,7 @@ async def administration_get(uuid: str):
     Administration
     """
     response = None
-    logger.info(f"START: Administration uuid:{uuid}")
     response = { "msg": "Not implemented" }
-    logger.info(f"DONE: Administration uuid:{uuid}, response:{response}")
     return response
 
 
@@ -266,13 +233,9 @@ async def dataproducts_health_get():
     """
     Get health information
     """
-    logger.info("START: Get health information")
-
     response = {
         "health": "OK"
     }
-
-    logger.info(f"DONE: Get health information, response:{response}")
     return response
 
 
@@ -281,13 +244,9 @@ async def dataproducts_metrics_get():
     """
     Get metrics information
     """
-    logger.info("START: Get metrics information")
-
     response = {
         "metrics": "some-metrics"
     }
-
-    logger.info(f"DONE: Get metrics information, response:{response}")
     return response
 
 
