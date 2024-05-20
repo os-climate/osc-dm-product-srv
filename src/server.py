@@ -31,6 +31,7 @@ from registrar import Registrar
 from bgsexception import BgsException, BgsNotFoundException
 from abstractmetadata import AbstractMetadata
 from middleware import LoggingMiddleware
+import constants
 
 # Set up logging
 LOGGING_FORMAT = "%(asctime)s - %(module)s:%(funcName)s %(levelname)s - %(message)s"
@@ -203,23 +204,24 @@ async def dataproducts_uuid_artifacts_get(uuid: str, artifact_uuid: str) -> mode
     return response
 
 
-@app.get(ENDPOINT_PREFIX + "/uuid/{uuid}/metrics")
-async def dataproducts_observability_get(uuid: str):
+@app.get(ENDPOINT_PREFIX + "/uuid/{uuid}/health")
+async def dataproducts_uuid_health_get(uuid: str):
     """
-    Observability
+    Get health information
     """
-    response = None
-    response = { "msg": "Not implemented" }
+    response = {
+        "health": "OK"
+    }
     return response
 
 
-@app.get(ENDPOINT_PREFIX + "/uuid/{uuid}/admin")
-async def administration_get(uuid: str):
+@app.get(ENDPOINT_PREFIX + "/uuid/{uuid}/metrics")
+async def dataproducts_uuid_metrics_get(uuid: str):
     """
-    Administration
+    Get metrics information
     """
-    response = None
-    response = { "msg": "Not implemented" }
+    metrics = LoggingMiddleware.get_metrics()
+    response = metrics
     return response
 
 
@@ -228,7 +230,7 @@ async def administration_get(uuid: str):
 #####
 
 
-@app.get(ENDPOINT_PREFIX + "/health")
+@app.get(ENDPOINT_PREFIX + "/uuid/{uuid}/health")
 async def dataproducts_health_get():
     """
     Get health information
@@ -239,14 +241,13 @@ async def dataproducts_health_get():
     return response
 
 
-@app.get(ENDPOINT_PREFIX + "/metrics")
+@app.get(ENDPOINT_PREFIX + "/uuid/{uuid}/metrics")
 async def dataproducts_metrics_get():
     """
     Get metrics information
     """
-    response = {
-        "metrics": "some-metrics"
-    }
+    metrics = LoggingMiddleware.get_metrics()
+    response = metrics
     return response
 
 
@@ -312,9 +313,14 @@ def _register():
                 f"port:{registrar.registrar_port} "
                 f"service:{service} method:{method}"
             )
+            import uuid
+            headers = {
+                constants.HEADER_USERNAME: constants.USERNAME,
+                constants.HEADER_CORRELATION_ID: str(uuid.uuid4())
+            }
             response = utilities.shttprequest(
                 registrar.registrar_host, registrar.registrar_port,
-                service, method, obj=product_dict)
+                service, method, headers=headers, obj=product_dict)
             logger.info(f"Registration SUCCESS, response:{response}")
             break
         except Exception as e:
@@ -361,7 +367,7 @@ async def startup_event():
     path = DATAPRODUCT_DIR
     logger.info(f"Initializing file monitor path:{path}")
     logger.info(f"Contents of Dataproduct directory:{os.listdir(path)}")
-    logger.info(f"STARTUP Using:{path}")
+    logger.info(f"Startup path:{path}")
     # Running the directory watcher in the background
     asyncio.create_task(watch_directory(path))
 
@@ -447,7 +453,7 @@ if __name__ == "__main__":
 
     # Start the service
     try:
-        logger.info(f"START: service on host:{host} port:{port}")
+        logger.info(f"Starting service on host:{host} port:{port}")
         uvicorn.run(app, host=host, port=port)
     except Exception as e:
         logger.info(f"Stopping server, exception:{e}")

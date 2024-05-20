@@ -8,7 +8,6 @@
 
 import logging
 import uuid
-from datetime import datetime
 
 # Set up logging
 LOGGING_FORMAT = "%(asctime)s - %(module)s:%(funcName)s %(levelname)s - %(message)s"
@@ -16,13 +15,9 @@ logging.basicConfig(level=logging.INFO, format=LOGGING_FORMAT)
 logger = logging.getLogger(__name__)
 
 import models
-from bgsexception import BgsException, BgsNotFoundException
-
-STATUS_AUTHORIZED = "authorized"
-STATUS_UNAUTHORIZED = "unauthorized"
-
 import utilities
 import models
+import constants
 
 class Registrar():
 
@@ -40,7 +35,13 @@ class Registrar():
         product_dict = product.model_dump()
         service = "/api/registrar/products"
         method = "POST"
-        response = await utilities.httprequest(self.registrar_host, self.registrar_port, service, method, obj=product_dict)
+        headers = {
+            constants.HEADER_USERNAME: constants.USERNAME,
+            constants.HEADER_CORRELATION_ID: str(uuid.uuid4())
+        }
+        response = await utilities.httprequest(
+            self.registrar_host, self.registrar_port, service, method,
+            headers=headers, obj=product_dict)
         logger.info(f"Registering product:{product}, response:{response}")
 
         return response
